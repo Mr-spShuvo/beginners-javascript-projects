@@ -1,0 +1,270 @@
+:root {
+    --color-primary: #fd5e53;
+    --color-secondary: #21bf73;
+
+    --color-bg: #fafafa;
+    --color-bg-shades: #cbfae3;
+    --color-text: #30475e;
+
+    --color-white: #fff;
+    --color-dark: #30475e;
+
+    --text-font: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+body.dark-theme {
+    --color-primary: #21bf73;
+    --color-secondary: #fd5e53;
+
+    --color-bg: #222831;
+    --color-bg-shades: #4b4b4d;
+    --color-text: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-image: linear-gradient(90deg, var(--color-bg), var(--color-bg-shades));
+    color: var(--color-text);
+    font-size: 1.65rem;
+    font-family: var(--text-font);
+}
+
+input,
+button,
+select {
+    font-family: var(--text-font);
+    color: var(--color-text);
+}
+
+button:hover,
+select:hover {
+    cursor: pointer;
+    opacity: .9;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}
+
+.switch {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--color-primary);
+    font-size: 4rem;
+    transition: all .5s ease-in-out;
+    box-shadow: 0 1px 2px 3px #00000010;
+}
+
+.switch:hover {
+    cursor: pointer;
+    transform: translateY(0);
+}
+
+.switch:active {
+    transform: translateY(3px);
+}
+
+.switch img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+header,
+form {
+    min-height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    font-size: 3.6rem;
+    font-weight: 700;
+}
+
+header h1 span {
+    color: var(--color-primary);
+    font-weight: 900;
+}
+
+form {
+    position: relative;
+}
+
+form input,
+form button {
+    padding: 1.5rem 2.5rem;
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-dark);
+}
+
+form input {
+    width: 280px;
+    border-right: 0;
+    font-size: 1.4rem;
+}
+
+form button {
+    padding: 1.1rem 2.5rem;
+    border-left: 0;
+    letter-spacing: .1px;
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    transition: all .3s;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    padding: 1.6rem;
+    padding-right: 5rem;
+    border: 2px solid var(--color-dark);
+    background-color: var(--color-bg);
+}
+
+
+.select {
+    margin-left: 2rem;
+    position: relative;
+}
+
+.select::after {
+    content: "\25BC";
+    color: var(--color-white);
+    background-color: var(--color-secondary);
+    padding: 1.6rem 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.todo-container {
+    max-width: 400px;
+    margin: 4rem auto;
+}
+
+.todo-list .todo {
+    list-style: none;
+    background-color: var(--color-bg);
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 2px 2px #00000010;
+    transition: all .5s ease-out;
+}
+
+.todo-list .todo p {
+    padding-left: 1.8rem;
+    transition: all .5s ease-in;
+}
+
+.todo-list .todo.todo--default {
+    padding: 1.6rem;
+    justify-content: center;
+    color: var(--color-text);
+}
+
+
+.todo-list .todo-action {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.delete,
+.checked {
+    color: var(--color-white);
+    padding: 1.8rem 1.5rem;
+    border: none;
+}
+
+.delete {
+    background-color: var(--color-primary);
+}
+
+.checked {
+    background-color: var(--color-secondary);
+}
+
+.delete img,
+.checked img{
+    pointer-events: none;
+}
+.broadcast {
+    position: fixed;
+    bottom: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 1.8rem 2.5rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: .65px;
+    box-shadow: 0 .5rem 2rem #00000020;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-none {
+    display: none;
+}
+
+.checked-item p {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.fall-out {
+    transform: translateX(-30px);
+    opacity: 0;
+}
+
+.fade-in {
+    animation: fade-in .1s ease-in;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        bottom: 0;
+    }
+
+    80% {
+        opacity: .8;
+
+    }
+
+    100% {
+        opacity: 1;
+        bottom: 3.5rem;
+    }
+}
