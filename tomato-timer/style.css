@@ -1,0 +1,223 @@
+:root {
+  --color-main: #ff6252;
+  --color-sub: #76dda2;
+  --color-text: #434e52;
+  --color-bg: #efefef;
+  --color-white: #fefefe;
+}
+
+* {
+  font-family: 'Kumbh Sans', Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 1.3rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.app {
+  width: 55rem;
+  height: 90vh;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 3rem;
+}
+
+.header__logo {
+  height: 3rem;
+}
+
+.header__title {
+  font-size: 2rem;
+}
+
+.clock {
+  margin: 4rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.clock-outline {
+  position: relative;
+}
+
+.clock-outline > svg {
+  width: 25rem;
+  height: 25rem;
+  fill: none;
+  stroke-width: 1.5rem;
+}
+
+.clock-outline__track {
+  stroke: var(--color-bg);
+}
+
+.clock-outline__moving {
+  stroke: var(--color-main);
+}
+
+.clock__time {
+  font-size: 5rem;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clock-outline__moving {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.clock__modify {
+  display: flex;
+  justify-content: space-between;
+  left: 10%;
+  position: absolute;
+  width: 80%;
+  top: 40%;
+}
+
+.clock__inc,
+.clock__dec {
+  background-color: transparent;
+  outline: none;
+  border: 4px solid var(--color-text);
+  height: 5rem;
+  padding: 1rem;
+  width: 5rem;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.controller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controller > button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.controller > button > i {
+  font-size: 3.5rem;
+}
+
+.controller__complete {
+  color: var(--color-sub);
+}
+
+.controller__reset {
+  color: var(--color-main);
+}
+
+.controller > button.controller__playpause {
+  margin: 0 5rem;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  text-align: center;
+  height: 6.5rem;
+  padding: 1rem;
+  width: 6.5rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controller > button.controller__playpause i {
+  font-size: 3rem;
+}
+
+.task {
+  margin: 0 auto;
+  margin-top: 5.5rem;
+  max-width: 60%;
+  padding: 0 1rem;
+}
+
+.task__header {
+  text-transform: uppercase;
+  word-spacing: 3px;
+}
+
+.task__title {
+  width: 100%;
+  margin-top: 0.8rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  border: none;
+  outline: none;
+}
+
+.media-player {
+  width: 28rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  background-color: var(--color-white);
+  padding: 1rem 2rem;
+  bottom: 5rem;
+  right: 5rem;
+  box-shadow: 1rem -1rem 7rem #00000020;
+}
+
+.media-player > button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.media-player > button.media-player__playpause > i {
+  padding: 1rem;
+  background-color: var(--color-bg);
+  font-size: 1.8rem;
+  border-radius: 50%;
+}
+
+.media-player > button.media-player__next > i {
+  font-size: 1.3rem;
+}
+
+.media-player__info h3 {
+  margin-bottom: 3px;
+}
+
+.media-player__info a {
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-sub);
+}

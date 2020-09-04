@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>tomatotimer - A Pomodoro Clock</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <img class="header__logo" src="images/tomato-timer.png" alt="Site Logo" />
+        <h1 class="header__title">tomatotimer</h1>
+      </header>
+      <section class="clock">
+        <div class="clock-outline">
+          <svg class="clock-outline__track" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="125" cy="125" r="117" />
+          </svg>
+          <svg class="clock-outline__moving" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="125" cy="125" r="117" />
+          </svg>
+        </div>
+        <h3 class="clock__time">25.00</h3>
+        <div class="clock__modify">
+          <button class="clock__inc">-5</button>
+          <button class="clock__dec">+5</button>
+        </div>
+      </section>
+      <section class="controller">
+        <button class="controller__complete">
+          <i class="im im-check-mark-circle-o"></i>
+        </button>
+        <button class="controller__playpause">
+          <i class="im im-pause"></i>
+        </button>
+        <button class="controller__reset">
+          <i class="im im-reset"></i>
+        </button>
+      </section>
+      <section class="task">
+        <h3 class="task__header">I'm Working on</h3>
+        <input class="task__title" type="text" placeholder="Write your task here.." maxlength="17" />
+      </section>
+    </div>
+    <div class="media-player">
+      <button class="media-player__playpause"><i class="im im-pause"></i></button>
+      <div class="media-player__info">
+        <h3>Coding Mix (Lo-fi Hiphop)</h3>
+        <a href="#">Chillox Cow</a>
+      </div>
+      <button class="media-player__next"><i class="im im-next"></i></button>
+    </div>
+  </body>
+</html>
