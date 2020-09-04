@@ -83,9 +83,9 @@ body {
 
 .clock-outline__moving {
   position: absolute;
-  top: 50%;
+  top: 49%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(-90deg);
   pointer-events: none;
 }
 
@@ -208,7 +208,7 @@ body {
   border-radius: 50%;
 }
 
-.media-player > button.media-player__next > i {
+.media-player > button.media-player__mut > i {
   font-size: 1.3rem;
 }
 

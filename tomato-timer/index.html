@@ -24,10 +24,10 @@
             <circle cx="125" cy="125" r="117" />
           </svg>
         </div>
-        <h3 class="clock__time">25.00</h3>
+        <h3 class="clock__time">25:00</h3>
         <div class="clock__modify">
-          <button class="clock__inc">-5</button>
-          <button class="clock__dec">+5</button>
+          <button class="clock__dec">-5</button>
+          <button class="clock__inc">+5</button>
         </div>
       </section>
       <section class="controller">
@@ -35,7 +35,7 @@
           <i class="im im-check-mark-circle-o"></i>
         </button>
         <button class="controller__playpause">
-          <i class="im im-pause"></i>
+          <i class="im im-play"></i>
         </button>
         <button class="controller__reset">
           <i class="im im-reset"></i>
@@ -43,16 +43,23 @@
       </section>
       <section class="task">
         <h3 class="task__header">I'm Working on</h3>
-        <input class="task__title" type="text" placeholder="Write your task here.." maxlength="17" />
+        <input class="task__title" type="text" placeholder="Write your task here.." maxlength="28" />
       </section>
     </div>
     <div class="media-player">
-      <button class="media-player__playpause"><i class="im im-pause"></i></button>
+      <button class="media-player__playpause"><i class="im im-play"></i></button>
       <div class="media-player__info">
         <h3>Coding Mix (Lo-fi Hiphop)</h3>
-        <a href="#">Chillox Cow</a>
+        <a href="https://www.youtube.com/watch?v=f02mOEt11OQ" target="_blank">The AMP Channel</a>
       </div>
-      <button class="media-player__next"><i class="im im-next"></i></button>
+      <button class="media-player__muted"><i class="im im-volume"></i></button>
     </div>
+
+    <!-- Not Display-->
+    <audio class="song" loop>
+      <source type="" src="./audio/code-fi.mp3" />
+    </audio>
+
+    <script src="app.js"></script>
   </body>
 </html>
