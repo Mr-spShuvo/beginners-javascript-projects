@@ -1,0 +1,137 @@
+* {
+  font-family: 'Syne', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+header {
+  height: 12vh;
+  text-align: center;
+  border-bottom: 2px solid #efefef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 5px #00000003;
+}
+
+.logo h1 {
+  font-size: 20px;
+}
+
+.note-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-list {
+  flex-basis: 25%;
+  list-style: none;
+}
+
+.note-add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 2vh;
+}
+
+.note-add button,
+.clear-search {
+  font-size: 30px;
+  line-height: 1;
+  padding: 0 8px 3px 8px;
+  display: inline-block;
+  background-color: #ddd;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.note-add button:hover,
+.clear-search:hover {
+  background: #d0d0d0;
+}
+.note-search {
+  position: relative;
+}
+.note-search input {
+  padding: 2vh;
+  text-align: center;
+  border-bottom: 1px solid #d0d0d0;
+  cursor: auto;
+}
+
+.clear-search {
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 111;
+  visibility: hidden;
+}
+
+.note-title,
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 1rem;
+  padding-left: 2rem;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+}
+
+.note-selected,
+.note-title:hover {
+  background-color: #f9f9f9;
+}
+
+.note-list {
+  padding-top: 2vh;
+  background-color: #efefef;
+}
+
+.note-list li {
+  width: 100%;
+}
+
+.note-list li:not(:last-child) {
+  border-bottom: 2px solid #dfdfdf;
+}
+
+.note-summary {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.note-details {
+  flex-basis: 70%;
+  padding-top: 5vh;
+}
+
+textarea {
+  width: 100%;
+  height: 82vh;
+  border: none;
+  resize: none;
+}
