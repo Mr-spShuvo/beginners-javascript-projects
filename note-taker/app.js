@@ -1,19 +1,27 @@
-// DOM Selector
-
+/******************************
+ * => DOM Elem & DOM Selectors
+ ******************************/
 const noteList = document.querySelector('.note-list ul');
 const addNote = document.querySelector('.note-add button');
 const noteDetails = document.querySelector('.note-details textarea');
 const searchNotes = document.querySelector('.note-search input');
 const clearSearch = document.querySelector('.clear-search');
-let noteSummary = '';
+let noteFormInput = '';
+const noteDOMInputElem = `<li>
+<input class="note-form" type="text" placeholder="Enter note title" />
+</li>`;
+const noteDOMElem = (id, title, summary = '') => `<li>
+<button class="note-title" id="${id}" onclick="selected(this)">${title} <span class="note-summary" >${summary}</span></button>
+<button data-id=${id} onclick="deleteNote(this)" class="note-delete">&Cross;</button>
+</li>`;
 
-// Locale Storage
-const generateRandomId = () => {
-  return `${Math.floor(Math.random() * 2000000)}`;
-};
+/**************************
+ * => Local Storage Funcs
+ ***************************/
+const getNotesFromLocal = () => JSON.parse(localStorage.getItem('notes'));
 
-const saveNewNote = (title, details = '') => {
-  const id = generateRandomId();
+const saveNewNoteToLocal = (title, details = '') => {
+  const id = `${Math.floor(Math.random() * 2000000)}`;
   const localNotes = JSON.parse(localStorage.getItem('notes'));
   const noteData = { id, title, details };
   const localData = localNotes ? [noteData, ...localNotes] : [noteData];
@@ -21,63 +29,65 @@ const saveNewNote = (title, details = '') => {
   return noteData;
 };
 
-const getNotes = () => JSON.parse(localStorage.getItem('notes'));
+const deleteNoteFromLocal = noteId => {
+  const localNotes = getNotesFromLocal();
+  const localData = localNotes.filter(note => note.id != noteId);
+  localStorage.setItem('notes', JSON.stringify(localData));
+};
 
-//Initial State
+/**************************
+ * => Initial App Rendering
+ ***************************/
 const renderELem = notes => {
   notes.forEach(note => {
-    const summary = note.details ? note.details.slice(0, 40) + '...' : '';
-    const noteItem = `<li>
-        <button class="note-title" id="${note.id}" onclick="selected(this)">${note.title} <span class="note-summary" >${summary}</span></button>
-      </li>`;
+    const summary = note.details ? note.details.slice(0, 35) + '...' : '';
+    const noteItem = noteDOMElem(note.id, note.title, summary);
     noteList.insertAdjacentHTML('beforeend', noteItem);
   });
 };
 const render = () => {
-  const notes = getNotes();
-  noteList.innerHTML = '';
+  const notes = getNotesFromLocal();
+  noteList.innerHTML = noteFormInput = '';
   if (notes) {
     renderELem(notes);
     const firstItem = document.querySelector('.note-title');
-    firstItem.classList.add('note-selected');
-    noteDetails.value = notes[0].details;
+    if (firstItem) {
+      firstItem.classList.add('note-selected');
+      noteDetails.value = notes[0].details;
+    }
   }
 };
 render();
 
-// Add Notes
-let noteFormInput = '';
+/**************************
+ * => Adding Note
+ **************************/
 addNote.addEventListener('click', () => {
   if (noteFormInput) return;
-  const noteForm = `<li>
-    <input class="note-form" type="text" placeholder="Enter note title" />
-  </li>`;
+  const clearButton = document.querySelector('.clear-search');
+  clearSearchField(clearButton);
 
-  noteList.insertAdjacentHTML('afterbegin', noteForm);
+  noteList.insertAdjacentHTML('afterbegin', noteDOMInputElem);
   noteFormInput = document.querySelector('.note-form');
   noteFormInput.focus();
 
-  // On input save notes
   noteFormInput.addEventListener('change', e => {
-    // Saving Note
-    const note = saveNewNote(e.target.value);
-
-    const noteItem = `<li>
-      <button id="${note.id}" class="note-title" onclick="selected(this)">${note.title} <span class="note-summary"></span></button>
-    </li>`;
+    const note = saveNewNoteToLocal(e.target.value);
+    const noteItem = noteDOMElem(note.id, note.title);
 
     noteList.insertAdjacentHTML('afterbegin', noteItem);
     noteFormInput = '';
     e.target.parentElement.remove();
 
-    // Select Note
     const selectedNote = document.querySelector('.note-title');
     noteDetails.value = note.details;
     checkSelected(selectedNote);
   });
 });
 
-// Select Notes
+/**************************
+ * => Select Notes
+ **************************/
 const checkSelected = e => {
   const isSelected = document.querySelector('.note-selected');
   if (isSelected) isSelected.classList.remove('note-selected');
@@ -85,37 +95,47 @@ const checkSelected = e => {
 };
 
 const selected = e => {
-  const selectedNote = getNotes().find(note => note.id == e.id);
+  const selectedNote = getNotesFromLocal().find(note => note.id == e.id);
   noteDetails.value = selectedNote.details;
   checkSelected(e);
 };
 
-// Updating Details
+/**************************
+ * => Updating Note Details
+ ***************************/
 noteDetails.addEventListener('input', e => {
   const itemId = document.querySelector('.note-selected').id;
-
   updateDetails(itemId, e.target.value);
-
-  const noteSummary = document.querySelector('.note-summary');
+  const noteSummary = document.querySelector('.note-selected .note-summary');
   noteSummary.textContent = e.target.value;
-
-  if (noteSummary.textContent.length && noteSummary.textContent.length >= 40) {
-    noteSummary.textContent = noteSummary.textContent.slice(0, 40) + '...';
+  if (noteSummary.textContent.length && noteSummary.textContent.length >= 35) {
+    noteSummary.textContent = noteSummary.textContent.slice(0, 35) + '...';
   }
 });
 
 const updateDetails = (id, details) => {
-  const localNotes = getNotes();
+  const localNotes = getNotesFromLocal();
   let localNote = localNotes.find(note => note.id == id);
   let index = localNotes.findIndex(note => note.id == id);
   localNote.details = details;
-
   localNotes[index] = localNote;
   localStorage.setItem('notes', JSON.stringify(localNotes));
   return localNotes;
 };
 
-// Search notes
+/**************************
+ * => Deleting Note
+ ***************************/
+
+const deleteNote = e => {
+  const id = e.dataset.id;
+  deleteNoteFromLocal(id);
+  render();
+};
+
+/**************************
+ * => Searching Notes
+ ***************************/
 const findNotes = e => {
   const keywords = e.target.value.toLowerCase();
   if (!keywords) {
@@ -124,21 +144,20 @@ const findNotes = e => {
   }
 
   clearSearch.style.visibility = 'visible';
-  const localNotes = getNotes();
+  const localNotes = getNotesFromLocal();
   const notes = localNotes.filter(note => note.title.toLowerCase().includes(keywords));
 
-  console.log(notes);
   if (notes) {
     noteList.innerHTML = '';
     renderELem(notes);
   }
 };
-
 searchNotes.addEventListener('input', findNotes);
 
 // Clear Search
-clearSearch.addEventListener('click', e => {
+const clearSearchField = elem => {
   searchNotes.value = '';
   render();
-  e.target.style.visibility = 'hidden';
-});
+  elem.style.visibility = 'hidden';
+};
+clearSearch.addEventListener('click', e => clearSearchField(e.target));

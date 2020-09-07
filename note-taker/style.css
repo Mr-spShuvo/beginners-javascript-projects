@@ -49,6 +49,7 @@ header {
 }
 
 .note-add button,
+.note-delete,
 .clear-search {
   font-size: 30px;
   line-height: 1;
@@ -62,9 +63,11 @@ header {
 }
 
 .note-add button:hover,
+.note-delete:hover,
 .clear-search:hover {
   background: #d0d0d0;
 }
+
 .note-search {
   position: relative;
 }
@@ -112,10 +115,19 @@ input {
 
 .note-list li {
   width: 100%;
+  display: flex;
 }
 
 .note-list li:not(:last-child) {
   border-bottom: 2px solid #dfdfdf;
+}
+
+.note-delete {
+  display: none;
+}
+
+.note-selected + .note-delete {
+  display: inline-block;
 }
 
 .note-summary {
