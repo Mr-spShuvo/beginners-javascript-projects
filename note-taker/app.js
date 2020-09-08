@@ -7,10 +7,12 @@ const noteDetails = document.querySelector('.note-details textarea');
 const searchNotes = document.querySelector('.note-search input');
 const clearSearch = document.querySelector('.clear-search');
 let noteFormInput = '';
+
 const noteDOMInputElem = `<li>
 <input class="note-form" type="text" placeholder="Enter note title" />
 </li>`;
-const noteDOMElem = (id, title, summary = '') => `<li>
+const noteDOMElem = (id, title, summary = '', createdAt) => `<li>
+<span class="note-created">${moment(createdAt).format('hh.mm A - MMM DD, YYYY')}</span>
 <button class="note-title" id="${id}" onclick="selected(this)">${title} <span class="note-summary" >${summary}</span></button>
 <button data-id=${id} onclick="deleteNote(this)" class="note-delete">&Cross;</button>
 </li>`;
@@ -20,10 +22,11 @@ const noteDOMElem = (id, title, summary = '') => `<li>
  ***************************/
 const getNotesFromLocal = () => JSON.parse(localStorage.getItem('notes'));
 
+const timestamp = moment().valueOf();
 const saveNewNoteToLocal = (title, details = '') => {
-  const id = `${Math.floor(Math.random() * 2000000)}`;
+  const id = uuidv4(); //`${Math.floor(Math.random() * 2000000)}`;
   const localNotes = JSON.parse(localStorage.getItem('notes'));
-  const noteData = { id, title, details };
+  const noteData = { id, title, details, createdAt: timestamp, updatedAt: timestamp };
   const localData = localNotes ? [noteData, ...localNotes] : [noteData];
   localStorage.setItem('notes', JSON.stringify(localData));
   return noteData;
@@ -41,7 +44,7 @@ const deleteNoteFromLocal = noteId => {
 const renderELem = notes => {
   notes.forEach(note => {
     const summary = note.details ? note.details.slice(0, 35) + '...' : '';
-    const noteItem = noteDOMElem(note.id, note.title, summary);
+    const noteItem = noteDOMElem(note.id, note.title, summary, note.createdAt);
     noteList.insertAdjacentHTML('beforeend', noteItem);
   });
 };
@@ -118,6 +121,7 @@ const updateDetails = (id, details) => {
   let localNote = localNotes.find(note => note.id == id);
   let index = localNotes.findIndex(note => note.id == id);
   localNote.details = details;
+  localNote.updatedAt = moment().valueOf();
   localNotes[index] = localNote;
   localStorage.setItem('notes', JSON.stringify(localNotes));
   return localNotes;
@@ -130,12 +134,13 @@ const updateDetails = (id, details) => {
 const deleteNote = e => {
   const id = e.dataset.id;
   deleteNoteFromLocal(id);
+
   render();
 };
 
 /**************************
  * => Searching Notes
- ***************************/
+ **************************/
 const findNotes = e => {
   const keywords = e.target.value.toLowerCase();
   if (!keywords) {
@@ -161,3 +166,25 @@ const clearSearchField = elem => {
   elem.style.visibility = 'hidden';
 };
 clearSearch.addEventListener('click', e => clearSearchField(e.target));
+
+/**************************
+ * => Sync Notes
+ **************************/
+
+window.addEventListener('storage', e => {
+  if (e.key == 'notes') {
+    notes = JSON.parse(e.newValue);
+    const itemId = document.querySelector('.note-selected').id;
+
+    note = notes.find(function (note) {
+      return note.id === itemId;
+    });
+
+    const noteSummary = document.querySelector('.note-selected .note-summary');
+    noteSummary.textContent = note.details;
+    if (noteSummary.textContent.length && noteSummary.textContent.length >= 35) {
+      noteSummary.textContent = noteSummary.textContent.slice(0, 35) + '...';
+    }
+    noteDetails.value = note.details;
+  }
+});
