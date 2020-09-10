@@ -6,6 +6,7 @@ const addNote = document.querySelector('.note-add button');
 const noteDetails = document.querySelector('.note-details textarea');
 const searchNotes = document.querySelector('.note-search input');
 const clearSearch = document.querySelector('.clear-search');
+const editedAtElem = document.querySelector('.note-updated span');
 let noteFormInput = '';
 
 const noteDOMInputElem = `<li>
@@ -57,6 +58,7 @@ const render = () => {
     if (firstItem) {
       firstItem.classList.add('note-selected');
       noteDetails.value = notes[0].details;
+      editedAtElem.textContent = moment(notes[0].updatedAt).fromNow();
     }
   }
 };
@@ -100,6 +102,7 @@ const checkSelected = e => {
 const selected = e => {
   const selectedNote = getNotesFromLocal().find(note => note.id == e.id);
   noteDetails.value = selectedNote.details;
+  editedAtElem.textContent = moment(selectedNote.updatedAt).fromNow();
   checkSelected(e);
 };
 
@@ -108,8 +111,9 @@ const selected = e => {
  ***************************/
 noteDetails.addEventListener('input', e => {
   const itemId = document.querySelector('.note-selected').id;
-  updateDetails(itemId, e.target.value);
+  const note = updateDetails(itemId, e.target.value);
   const noteSummary = document.querySelector('.note-selected .note-summary');
+  editedAtElem.textContent = moment(note.updatedAt).fromNow();
   noteSummary.textContent = e.target.value;
   if (noteSummary.textContent.length && noteSummary.textContent.length >= 35) {
     noteSummary.textContent = noteSummary.textContent.slice(0, 35) + '...';
@@ -134,7 +138,6 @@ const updateDetails = (id, details) => {
 const deleteNote = e => {
   const id = e.dataset.id;
   deleteNoteFromLocal(id);
-
   render();
 };
 

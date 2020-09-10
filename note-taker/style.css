@@ -146,12 +146,25 @@ input {
 .note-details {
   flex-basis: 70%;
   padding-top: 5vh;
+  position: relative;
+}
+
+.note-updated {
+  position: absolute;
+  bottom: 0;
+  color: #999;
+  background: #f1f1f1;
+  padding: 3px 1rem;
+  font-size: 13px;
+  width: 100%;
 }
 
 textarea {
   width: 100%;
   min-height: 83vh;
   border: none;
+  outline: none;
   resize: none;
   line-height: 2rem;
+  padding-bottom: 2rem;
 }
