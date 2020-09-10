@@ -1,36 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Staatliches&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Staatliches&display=swap");
 
 :root {
+  --bg-color: #14142b;
   --neon-color: #08f;
   --color-text: #e4f1ff;
-  --box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 5px var(--neon-color),
-    inset 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), inset 0 0 10px var(--neon-color);
-  --text-shadow: 0 0 6px rgba(202, 228, 225, 0.98), 0 0 30px rgba(202, 228, 225, 0.42),
-    0 0 12px rgba(30, 132, 242, 0.58), 0 0 22px rgba(30, 132, 242, 0.84),
-    0 0 38px rgba(30, 132, 242, 0.88), 0 0 60px rgba(30, 132, 242, 1);
+  --box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 5px var(--neon-color), inset 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), inset 0 0 10px var(--neon-color);
+  --text-shadow: 0 0 6px rgba(202, 228, 225, 0.98), 0 0 30px rgba(202, 228, 225, 0.42), 0 0 12px rgba(30, 132, 242, 0.58), 0 0 22px rgba(30, 132, 242, 0.84), 0 0 38px rgba(30, 132, 242, 0.88), 0 0 60px rgba(30, 132, 242, 1);
+  --special-text: "Staatliches", cursive;
+}
+
+.failed {
+  --neon-color: #c92c10;
+  --neon-text-color: #c92c10;
+  --text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff, 0 0 2rem var(--neon-text-color), 0 0 4rem var(--neon-text-color), 0 0 6rem var(--neon-text-color), 0 0 8rem var(--neon-text-color), 0 0 10rem var(--neon-text-color);
+  --box-shadow: 0 0 3px #fff, inset 0 0 3px #fff, 0 0 5px var(--neon-color), inset 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), inset 0 0 10px var(--neon-color);
 }
 
 * {
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
   padding: 0;
   margin: 0;
   text-shadow: var(--text-shadow);
 }
 
 body {
-  background-color: #14142b;
+  background-color: var(--bg-color);
   color: var(--color-text);
 }
 
 header {
+  text-align: center;
   margin-top: 30px;
-  margin-left: 30px;
 }
 
 .site-logo {
   font-size: 32px;
   letter-spacing: 5px;
-  font-family: 'Staatliches', cursive;
+  font-family: "Staatliches", cursive;
   line-height: 1;
   text-shadow: var(--text-shadow);
   border: 4px solid #fff;
@@ -40,19 +46,8 @@ header {
   border-radius: 5px;
 }
 
-.type-anim__letter {
-  text-shadow: var(--text-shadow);
-  font-size: 20px;
-  padding: 10px 15px;
-  display: inline-block;
-  border: 2px solid var(--color-text);
-  border-radius: 5px;
-  text-transform: uppercase;
-  box-shadow: var(--box-shadow);
-}
-
 .game {
-  margin-top: 22vh;
+  margin-top: 20vh;
   text-align: center;
 }
 
@@ -63,9 +58,92 @@ header {
 }
 
 .game__remainingGuess {
-  position: absolute;
-  right: 30px;
-  top: 50px;
   font-size: 24px;
+  margin: 40px 0;
+  text-align: center;
   text-transform: uppercase;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #14142b80;
+  width: 100vw;
+  height: 73vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-overlay__box {
+  background-color: var(--bg-color);
+  width: 50vw;
+  height: 50vh;
+  border: 3px solid #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-overlay__title {
+  font-size: 36px;
+  margin-bottom: 30px;
+  font-family: var(--special-text);
+}
+
+.game-overlay__info {
+  font-size: 20px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.game-overlay__action,
+.keyboard__letter {
+  text-shadow: var(--text-shadow);
+  font-size: 20px;
+  padding: 10px 15px;
+  display: inline-block;
+  border: 2px solid var(--color-text);
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: var(--box-shadow);
+  background-color: transparent;
+  color: var(--color-text);
+  font-family: var(--special-text);
+  cursor: pointer;
+  outline: none;
+}
+
+.game-overlay__action {
+  padding: 15px 40px;
+  letter-spacing: 1px;
+}
+
+.game-overlay__action:hover,
+.keyboard__letter:hover {
+  background-color: var(--color-text);
+  color: var(--bg-color);
+}
+
+.keyboard {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.keyboard__letter {
+  display: inline-block;
+  margin: 5px 8px;
+}
+
+.keyboard__letter--disabled {
+  pointer-events: none;
+  background-color: var(--color-text);
+  color: var(--bg-color);
 }

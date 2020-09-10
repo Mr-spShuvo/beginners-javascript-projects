@@ -11,13 +11,18 @@
       <h1 class="site-logo">Hangman Game</h1>
     </header>
     <div class="game">
-      <h3 class="game__puzzle"></h3>
-      <p class="game__remainingGuess">Remaining Guess: <span></span></p>
+      <h3 class="game__puzzle">____ _____</h3>
+      <p class="game__remainingGuess">Remaining Guess: <span>0</span></p>
     </div>
-    <div class="game-overlay"></div>
-    <div class="type-anim">
-      <p class="type-anim__letter">c</p>
+    <div class="game-overlay">
+      <div class="game-overlay__box">
+        <h3 class="game-overlay__title">Can You Guess it?</h3>
+        <h4 class="game-overlay__info">You will have 3 attempt for Guess it Right.</h4>
+        <button class="game-overlay__action">Start Playing</button>
+      </div>
     </div>
+    <div class="keyboard"></div>
+    <script src="hangman.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
