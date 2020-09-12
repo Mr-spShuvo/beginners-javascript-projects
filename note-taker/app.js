@@ -13,11 +13,44 @@ let noteFormInput = '';
 const noteDOMInputElem = `<li>
 <input class="note-form" type="text" placeholder="Enter note title" />
 </li>`;
+
+const noNoteElem = `<li class="no-notes">
+  <h3 class="note-title">No Notes Found! <span class="note-summary">Go ahead and create one. 😍</span></h3>
+</li>`;
+
 const noteDOMElem = (id, title, summary = '', createdAt) => `<li>
 <span class="note-created">${moment(createdAt).format('hh.mm A - MMM DD, YYYY')}</span>
 <button class="note-title" id="${id}" onclick="selected(this)">${title} <span class="note-summary" >${summary}</span></button>
 <button data-id=${id} onclick="deleteNote(this)" class="note-delete">&Cross;</button>
 </li>`;
+
+/**************************
+ * => App Themes
+ **************************/
+const appThemeSwitcher = (button, appTheme) => {
+  if (appTheme === 'light') {
+    document.querySelector('body').classList.add('light-mode');
+    button.innerHTML = '&#9865;';
+  } else if (appTheme === 'dark') {
+    document.querySelector('body').classList.remove('light-mode');
+    button.innerHTML = '&#9728;';
+  }
+};
+
+let appTheme = localStorage.getItem('notes-theme');
+appThemeSwitcher(appThemeButton, appTheme);
+
+appThemeButton.addEventListener('click', e => {
+  if (appTheme === 'light') {
+    appTheme = 'dark';
+    appThemeSwitcher(appThemeButton, appTheme);
+    localStorage.setItem('notes-theme', appTheme);
+  } else if (appTheme === 'dark' || appTheme === null) {
+    appTheme = 'light';
+    appThemeSwitcher(appThemeButton, appTheme);
+    localStorage.setItem('notes-theme', appTheme);
+  }
+});
 
 /**************************
  * => Local Storage Funcs
@@ -50,10 +83,16 @@ const renderELem = notes => {
     noteList.insertAdjacentHTML('beforeend', noteItem);
   });
 };
+
 const render = () => {
   const notes = getNotesFromLocal();
-  noteList.innerHTML = noteFormInput = '';
-  if (notes) {
+  const noNotes = document.querySelector('.no-notes');
+  console.log(noNotes);
+  console.log(notes);
+  noteList.innerHTML = '';
+  if (notes !== null && notes.length !== 0) {
+    noteList.innerHTML = '';
+    noteFormInput = '';
     renderELem(notes);
     const firstItem = document.querySelector('.note-title');
     if (firstItem) {
@@ -61,7 +100,7 @@ const render = () => {
       noteDetails.value = notes[0].details;
       editedAtElem.textContent = moment(notes[0].updatedAt).fromNow();
     }
-  }
+  } else if (!noNotes) noteList.insertAdjacentHTML('afterbegin', noNoteElem);
 };
 render();
 
@@ -80,6 +119,8 @@ addNote.addEventListener('click', () => {
   noteFormInput.addEventListener('change', e => {
     const note = saveNewNoteToLocal(e.target.value);
     const noteItem = noteDOMElem(note.id, note.title);
+    const noNotes = document.querySelector('.no-notes');
+    if (noNotes) noNotes.remove();
 
     noteList.insertAdjacentHTML('afterbegin', noteItem);
     noteFormInput = '';
@@ -139,6 +180,7 @@ const updateDetails = (id, details) => {
 const deleteNote = e => {
   const id = e.dataset.id;
   deleteNoteFromLocal(id);
+  noteDetails.value = '';
   render();
 };
 
@@ -190,32 +232,5 @@ window.addEventListener('storage', e => {
       noteSummary.textContent = noteSummary.textContent.slice(0, 35) + '...';
     }
     noteDetails.value = note.details;
-  }
-});
-
-/**************************
- * => Dark Modes
- **************************/
-
-const appThemeSwitcher = (button, appTheme) => {
-  if (appTheme === 'light') {
-    document.querySelector('body').classList.add('light-mode');
-    button.innerHTML = '&#9865;';
-  } else if (appTheme === 'dark') {
-    document.querySelector('body').classList.remove('light-mode');
-    button.innerHTML = '&#9728;';
-  }
-};
-
-let appTheme = localStorage.getItem('notes-theme');
-appThemeSwitcher(appThemeButton, appTheme);
-
-appThemeButton.addEventListener('click', e => {
-  if (appTheme === 'light' || appTheme === null) {
-    appThemeSwitcher(appThemeButton, 'light');
-    appTheme = 'dark';
-  } else if (appTheme === 'dark') {
-    appThemeSwitcher(appThemeButton, 'dark');
-    appTheme = 'light';
   }
 });
