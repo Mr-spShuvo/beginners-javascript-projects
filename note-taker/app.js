@@ -1,12 +1,13 @@
 /******************************
  * => DOM Elem & DOM Selectors
  ******************************/
-const noteList = document.querySelector('.note-list ul');
+const noteList = document.querySelector('.note-list');
 const addNote = document.querySelector('.note-add button');
 const noteDetails = document.querySelector('.note-details textarea');
 const searchNotes = document.querySelector('.note-search input');
 const clearSearch = document.querySelector('.clear-search');
 const editedAtElem = document.querySelector('.note-updated span');
+const appThemeButton = document.querySelector('.app-theme button');
 let noteFormInput = '';
 
 const noteDOMInputElem = `<li>
@@ -189,5 +190,32 @@ window.addEventListener('storage', e => {
       noteSummary.textContent = noteSummary.textContent.slice(0, 35) + '...';
     }
     noteDetails.value = note.details;
+  }
+});
+
+/**************************
+ * => Dark Modes
+ **************************/
+
+const appThemeSwitcher = (button, appTheme) => {
+  if (appTheme === 'light') {
+    document.querySelector('body').classList.add('light-mode');
+    button.innerHTML = '&#9865;';
+  } else if (appTheme === 'dark') {
+    document.querySelector('body').classList.remove('light-mode');
+    button.innerHTML = '&#9728;';
+  }
+};
+
+let appTheme = localStorage.getItem('notes-theme');
+appThemeSwitcher(appThemeButton, appTheme);
+
+appThemeButton.addEventListener('click', e => {
+  if (appTheme === 'light' || appTheme === null) {
+    appThemeSwitcher(appThemeButton, 'light');
+    appTheme = 'dark';
+  } else if (appTheme === 'dark') {
+    appThemeSwitcher(appThemeButton, 'dark');
+    appTheme = 'light';
   }
 });

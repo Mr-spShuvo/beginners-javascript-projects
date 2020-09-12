@@ -1,51 +1,105 @@
+:root {
+  --color-main: #282828;
+  --color-sub: #323232;
+  --color-gray: #999;
+  --color-dark: #1f1f1f;
+  --color-text: #f9fefe;
+  --color-text-deemed: #ddd;
+  --color-color: #3924ad;
+  --border: 1px solid #333;
+  --color-white: #fff;
+}
+
+body.light-mode {
+  --color-main: #efefef;
+  --color-sub: #fff;
+  --color-dark: #fff;
+  --color-text: #333;
+  --border: 1px solid #ddd;
+  --color-text-deemed: #888;
+}
+
 * {
-  font-family: 'Syne', Arial, Helvetica, sans-serif;
+  font-family: 'Lexend Deca', Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--color-text);
 }
 
 body {
   font-size: 14px;
+  transition: all 0.3s ease-in-out;
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 600;
+.container {
+  width: 85%;
+  margin: 0 auto;
 }
 
-header {
-  height: 12vh;
-  text-align: center;
-  border-bottom: 2px solid #efefef;
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  align-items: stretch;
+}
+
+.app-sidebar {
+  flex-basis: 25%;
+  background-color: var(--color-main);
+}
+
+.app-main {
+  flex-basis: 75%;
+  background-color: var(--color-sub);
+}
+
+.header {
+  padding: 2vh 0;
+}
+
+.header > .container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 1px 5px #00000003;
 }
 
 .logo h1 {
   font-size: 20px;
+  font-weight: 500;
 }
 
-.note-area {
-  display: flex;
-  justify-content: space-between;
+.logo p {
+  color: var(--color-gray);
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
-.note-list {
-  flex-basis: 25%;
-  list-style: none;
+.app-theme button {
+  background-color: transparent;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--color-text-deemed);
 }
-
+.dark-mode button:hover {
+  opacity: 0.9;
+}
 .note-add {
+  border-bottom: var(--border);
+}
+
+.note-add > .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  margin: 0 auto;
-  padding-bottom: 2vh;
+  padding: 2vh 0;
+}
+
+.note-add h3 {
+  color: var(--color-gray);
+  font-weight: 500;
 }
 
 .note-add button,
@@ -53,36 +107,42 @@ header {
 .clear-search {
   font-size: 30px;
   line-height: 1;
-  padding: 0 8px 3px 8px;
+  padding: 0 14px 7px 14px;
   display: inline-block;
-  background-color: #ddd;
+  background-color: var(--color-color);
   border: none;
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  color: var(--color-white);
 }
 
 .note-add button:hover,
 .note-delete:hover,
 .clear-search:hover {
-  background: #d0d0d0;
+  opacity: 0.9;
 }
 
-.note-search {
+.note-search > .container {
   position: relative;
 }
+
 .note-search input {
-  padding: 2vh;
+  width: 100%;
+  padding: 3vh;
+  display: inline-block;
   text-align: center;
-  border-bottom: 1px solid #d0d0d0;
+  font-size: 14px;
+
   cursor: auto;
 }
 
 .clear-search {
-  font-size: 20px;
+  font-size: 30px;
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 0px;
+  top: 47%;
+  transform: translateY(-50%);
   z-index: 111;
   visibility: hidden;
 }
@@ -94,9 +154,11 @@ input {
   outline: none;
   text-align: left;
   cursor: pointer;
-  padding: 2rem 1rem 1rem 2rem;
+  padding-top: 4vh;
+  padding-bottom: 3vh;
+  padding-left: 7.5%;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   width: 100%;
   display: inline-block;
   transition: all 0.3s ease-in-out;
@@ -104,12 +166,11 @@ input {
 
 .note-selected,
 .note-title:hover {
-  background-color: #f9f9f9;
+  background-color: var(--color-dark);
 }
 
 .note-list {
-  padding-top: 2vh;
-  background-color: #efefef;
+  list-style: none;
 }
 
 .note-list li {
@@ -119,14 +180,15 @@ input {
 }
 
 .note-list li:not(:last-child) {
-  border-bottom: 2px solid #dfdfdf;
+  border-bottom: var(--border);
 }
 
 .note-created {
   position: absolute;
-  left: 2rem;
+  font-size: 12px;
+  left: 7.5%;
   top: 0.5rem;
-  color: #999;
+  color: var(--color-gray);
 }
 
 .note-delete {
@@ -141,30 +203,35 @@ input {
   display: block;
   font-size: 14px;
   font-weight: 400;
+  color: var(--color-text-deemed);
 }
 
 .note-details {
-  flex-basis: 70%;
-  padding-top: 5vh;
-  position: relative;
-}
+  flex-basis: 75%;
 
-.note-updated {
-  position: absolute;
-  bottom: 0;
-  color: #999;
-  background: #f1f1f1;
-  padding: 3px 1rem;
-  font-size: 13px;
-  width: 100%;
+  position: relative;
 }
 
 textarea {
   width: 100%;
-  min-height: 83vh;
+  min-height: 100vh;
+  padding-top: 3.5%;
+  padding-left: 5%;
+  font-size: 14px;
   border: none;
   outline: none;
   resize: none;
   line-height: 2rem;
   padding-bottom: 2rem;
+  background-color: var(--color-sub);
+}
+
+.note-updated {
+  position: absolute;
+  bottom: 0;
+  font-size: 12px;
+  color: var(--color-gray);
+  background: var(--color-main);
+  padding: 5px 1rem;
+  width: 100%;
 }

@@ -4,36 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>📝 Note Taker</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="logo">
-        <h1>Note Taker</h1>
-        <p>Store Your Daily Thoughts</p>
-      </div>
-    </header>
-
-    <div class="container">
-      <div class="note-area">
-        <div class="note-list">
-          <div class="note-add">
-            <h3>Notes</h3>
-            <button>+</button>
+    <div class="app-wrapper">
+      <div class="app-sidebar">
+        <header class="header">
+          <div class="container">
+            <div class="logo">
+              <h1>notetaker</h1>
+              <p>Store Your Thoughts</p>
+            </div>
+            <div class="app-theme">
+              <button title="Enable Dark Mode">&#9728;</button>
+            </div>
           </div>
-          <div class="note-search">
-            <input type="text" placeholder="Search Notes..." />
-            <button class="clear-search">&larr;</button>
+        </header>
+        <!-- Add Notes -->
+        <div class="note-add">
+          <div class="container">
+            <h3>All Notes</h3>
+            <button title="Add Notes">+</button>
           </div>
-          <ul>
-            <!-- Note Item -->
-          </ul>
         </div>
-
+        <!-- Search Notes -->
+        <div class="note-search">
+          <div class="container">
+            <input type="text" placeholder="Search Notes..." />
+            <button class="clear-search">&lsaquo;</button>
+          </div>
+        </div>
+        <!-- Lists of  Notes -->
+        <ul class="note-list">
+          <!-- Note Item -->
+        </ul>
+      </div>
+      <div class="app-main">
         <div class="note-details">
           <textarea placeholder="Write something awesome..."></textarea>
           <p class="note-updated">Last edited <span></span></p>
