@@ -9,7 +9,6 @@ const action = document.querySelector('.game-overlay__action');
 
 // Generating Keyboard Layout
 const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
 letters.forEach((letter, index) => {
   const element = `<button class="keyboard__letter" onclick="gamePlay(this.dataset.key)" data-key=${letter}>${letter}</button>`;
   keyword.insertAdjacentHTML('beforeend', element);
@@ -19,24 +18,24 @@ letters.forEach((letter, index) => {
 });
 
 // Getting Random Words from API
-
-const getRandomWord = async callback => {
+const getRandomWord = async () => {
   const res = await fetch('https://random-word-api.herokuapp.com/word');
-  const randomWord = await res.json();
-  callback(randomWord[0]);
+  const [data] = await res.json();
+  return data;
 };
 
 // Create Game Instances
-let game;
-let randomWord;
-const startGame = () => {
-  getRandomWord(word => {
-    randomWord = word;
+let game, word;
+const startGame = async () => {
+  try {
+    word = await getRandomWord();
     console.log(word);
     game = new Hangman(word, 3);
     puzzleElem.textContent = game.getPuzzle();
     guessElem.textContent = game.remainingGuess;
-  });
+  } catch (e) {
+    console.log('Error while fetching random word.');
+  }
 };
 startGame();
 
@@ -63,7 +62,7 @@ const gameResults = status => {
   }
   if (status == 'failed') {
     title.textContent = "Alas! You've Failed.";
-    info.textContent = `The word was ${randomWord}`;
+    info.textContent = `The word was ${word}`;
     action.textContent = 'Try again!';
     gameOverlay.classList.add('failed');
     startGame();
@@ -89,12 +88,14 @@ window.addEventListener('keypress', e => {
 
 // Disabling Guessed Key
 const disabledKey = guessKey => {
-  const elem = document.querySelector(`[data-key=${guessKey}]`);
-  elem.classList.add('keyboard__letter--disabled');
+  if (letters.includes(guessKey)) {
+    const elem = document.querySelector(`[data-key=${guessKey}]`);
+    elem.classList.add('keyboard__letter--disabled');
+  }
 };
 
 // Reset disabled Keys
 const resetKeyBoardState = () => {
   const keys = document.querySelectorAll('.keyboard__letter--disabled');
-  keys.forEach(key => key.classList.remove('keyboard__letter--disabled'));
+  if (keys) keys.forEach(key => key.classList.remove('keyboard__letter--disabled'));
 };
