@@ -7,6 +7,6 @@ For generating random words, I used the [random-word-api](https://random-word-ap
 
 ## App Preview 😍
 
-### 👉👉👉 [Live Link](https://hangmanglow.netlify.app/)
+### 👉 [Live Link](https://hangmanglow.netlify.app/)
 
 ![App Preview](screenshot.gif)
