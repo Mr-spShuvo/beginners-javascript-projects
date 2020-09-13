@@ -3,12 +3,13 @@
 The advanced note taker application built using JavaScript ES6 with local storage API.
 
 **App Features:**
-✏️ Create Notes on The Fly
-✏️ Note Created Dates and Last Updated Status
-✏️ Search Notes by Title
-✏️ Storing Data with Local Storage
-✏️ Multiple Browser Tab Sync
-✏️ Dark Mode and Many More.
+
+- ✏️ Create Notes on The Fly
+- ✏️ Note Created Dates and Last Updated Status
+- ✏️ Search Notes by Title
+- ✏️ Storing Data with Local Storage
+- ✏️ Multiple Browser Tab Sync
+- ✏️ Dark Mode and Many More.
 
 ## App Preview 😍
 
