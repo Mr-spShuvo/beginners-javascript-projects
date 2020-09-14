@@ -8,13 +8,13 @@ const filterOption = document.querySelector('.filter-todos');
 function todoElem(title, status) {
   let itemChecked = status === 'completed' ? 'checked-item' : '';
   return `
-        <li class="todo ${itemChecked}">
-            <p>${title}</p>
-            <div class="todo-action">
-                <button class="checked"><img src="images/check.svg"></button>
-                <button class="delete"><img src="images/delete.svg"></button>
-            </div>
-        </li>
+     <li class="todo ${itemChecked}">
+        <p>${title}</p>
+        <div class="todo-action">
+            <button class="checked"><img src="images/check.svg"></button>
+            <button class="delete"><img src="images/delete.svg"></button>
+        </div>
+      </li>
     `;
 }
 
@@ -27,7 +27,7 @@ function addTodo(e) {
   } else {
     let todoText = todoInput.value;
     defaultTodo.style.display = 'none';
-    todoList.insertAdjacentHTML(`beforeend`, todoElem(todoText));
+    todoList.insertAdjacentHTML(`afterbegin`, todoElem(todoText));
     broadcast('Todo Added Successfully!', 'success');
     saveToLocal(todoText);
     todoInput.value = '';
@@ -64,10 +64,11 @@ function checkedDeleteTodo(e) {
   }
 }
 
-filterOption.addEventListener('click', filterTod);
+filterOption.addEventListener('click', filterTodo);
 
 function filterTodo(e) {
   const todos = document.querySelectorAll('.todo');
+  console.log(todos);
   todos.forEach(todo => {
     switch (e.target.value) {
       case 'completed':
@@ -88,6 +89,9 @@ function filterTodo(e) {
   });
 }
 
+/************************
+ * => Alert Actions
+ ************************/
 function broadcast(msg, type) {
   let broadcastMsg = document.querySelector('.broadcast__msg');
   broadcastMsg.innerText = msg;
@@ -101,7 +105,9 @@ function broadcast(msg, type) {
   }, 1500);
 }
 
-// Local Storage Functionality
+/************************
+ * => Local Storage
+ ************************/
 let localTodo;
 
 function checkLocalStorage() {
