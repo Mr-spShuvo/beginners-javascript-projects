@@ -12,7 +12,7 @@ function todoElem(title, status) {
         <p>${title}</p>
         <div class="todo-action">
             <button class="checked"><img src="images/check.svg"></button>
-            <button class="delete"><img src="images/delete.svg"></button>
+            <button class="delete"><img src="images/delete.svg"></ button>
         </div>
       </li>
     `;

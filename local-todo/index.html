@@ -23,22 +23,23 @@
         <div class="project-list">
           <form class="project-form">
             <input type="text" class="project-input" placeholder="Enter Project Title" />
-            <button class="project-button"><img src="images/add.svg" /></button>
+            <button class="project-button" type="submit"><img src="images/add.svg" /></button>
           </form>
           <div class="project-header">
             <h3>Project List</h3>
           </div>
-          <ul>
-            <li><button class="project project--active">Project A</button></li>
-            <li><button class="project">Project B</button></li>
-            <li><button class="project">Project C</button></li>
+          <ul class="project-container">
+            <!-- <li><button class="project project--active">Project A</button></li> -->
           </ul>
         </div>
       </div>
       <div class="todo-area">
         <div class="todo-header">
-          <h2 class="todo-header__title">Todo List</h2>
-          <p class="todo-header__info">Project A</p>
+          <div class="todo-header__box">
+            <h2 class="todo-header__title">Todo List</h2>
+            <p class="todo-header__info">Your Project Title</p>
+          </div>
+          <p class="todo-counter">03 Tasks Remaining</p>
         </div>
         <form class="todo-form">
           <input type="text" class="todo-input" placeholder="Eg. Go to Shopping Mall" data-typing="enabled" />
@@ -55,6 +56,13 @@
         <div class="todo-container">
           <ul class="todo-list">
             <li class="todo todo--default">Hurray, Nothing's left to do!</li>
+            <!-- <li class="todo ${itemChecked}">
+              <p>${title}</p>
+              <div class="todo-action">
+                  <button class="checked"><img src="images/check.svg"></button>
+                  <button class="delete"><img src="images/delete.svg"></ button>
+              </div>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -65,6 +73,6 @@
       <p><img src="images/info.svg" /></p>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
