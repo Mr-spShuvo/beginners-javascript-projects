@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:500,600,900&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div class="switch">
-      <img src="images/switch.svg" />
+    <div class="app-theme">
+      <button title="Toggle Dark Mode">&#9728;</button>
     </div>
     <div class="app-wrapper">
       <div class="project-area">
@@ -20,7 +20,7 @@
             <span class="app-header__symbol">]</span>
           </h1>
         </header>
-        <div class="project-list">
+        <div class="project-container">
           <form class="project-form">
             <input type="text" class="project-input" placeholder="Enter Project Title" />
             <button class="project-button" type="submit"><img src="images/add.svg" /></button>
@@ -28,8 +28,8 @@
           <div class="project-header">
             <h3>Project List</h3>
           </div>
-          <ul class="project-container">
-            <!-- <li><button class="project project--active">Project A</button></li> -->
+          <ul class="project-list">
+            <li><button class="project" disabled>No Project Found!</button></li>
           </ul>
         </div>
       </div>
@@ -39,12 +39,11 @@
             <h2 class="todo-header__title">Todo List</h2>
             <p class="todo-header__info">Your Project Title</p>
           </div>
-          <p class="todo-counter">03 Tasks Remaining</p>
+          <p class="todo-counter">No Tasks Remaining!</p>
         </div>
         <form class="todo-form">
           <input type="text" class="todo-input" placeholder="Eg. Go to Shopping Mall" data-typing="enabled" />
           <button class="todo-button" type="submit"><img src="images/add.svg" /></button>
-
           <div class="todo-select">
             <select class="filter-todo">
               <option value="all">All</option>
@@ -55,7 +54,7 @@
         </form>
         <div class="todo-container">
           <ul class="todo-list">
-            <li class="todo todo--default">Hurray, Nothing's left to do!</li>
+            <li class="todo todo--default">No tasks here!</li>
             <!-- <li class="todo ${itemChecked}">
               <p>${title}</p>
               <div class="todo-action">

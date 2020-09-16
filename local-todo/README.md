@@ -3,38 +3,17 @@
 **Local Todo** is a basic JavaScript app that uses Local Storage API to stores todo object data.
 The app has some additional features like:
 
-:pushpin: Filtering Todo using the drop down menu
+**App Features:**
 
-:pushpin: Theme Switching (Light and Dark theme)
+- ✏️ Create Projects
+- ✏️ Create Todo based on the Project
+- ✏️ Toast Messages Notification
+- ✏️ Storing Data with Local Storage
+- ✏️ Filtering Todo using the drop down menu
+- ✏️ Dark Mode and Many More.
 
-:pushpin: Toast Messages Notification (Broadcasting Info)
+## App Preview 😍
 
-:pushpin: Animation and Many more.
+### 👉 [Live Link](local-todo.netlify.app)
 
-You can extends :hammer_and_wrench: features like storing data to a database Using nodejs.
-
-**Here are some screenshots:**
-
-***Home Page:***
-
-![home](screenshots/home.png)
-
-***Check Input Field (Basic):***
-
-![empty](screenshots/empty.png)
-
-***Adding Task:***
-
-![add](screenshots/adding-todo.png)
-
-***Checked Task:***
-
-![check](screenshots/checked-todo.png)
-
-***Deleting all Todo:***
-
-![delete](screenshots/deleteing-todo.png)
-
-***Switching to Dark Theme:***
-
-![theme](screenshots/dark-theme.png)
+![App Preview](screenshot.gif)

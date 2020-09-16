@@ -58,32 +58,17 @@ button:focus {
   outline: none;
 }
 
-.switch {
+.app-theme button {
   position: absolute;
-  top: 3rem;
+  top: 2.3rem;
   right: 3rem;
   width: 4rem;
   height: 4rem;
-  background-color: var(--color-primary);
+  background-color: transparent;
+  outline: none;
+  border: none;
   font-size: 4rem;
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 1px 2px 3px #00000010;
-}
-
-.switch:hover {
-  cursor: pointer;
-  transform: translateY(0);
-}
-
-.switch:active {
-  transform: translateY(3px);
-}
-
-.switch img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .app-wrapper {
@@ -147,7 +132,7 @@ button:focus {
   font-weight: 600;
 }
 
-.project-list ul {
+.project-list {
   list-style: none;
 }
 
@@ -309,15 +294,19 @@ button > img {
 }
 
 .todo-list .todo {
-  cursor: pointer;
   padding-left: 1.8rem;
   transition: all 0.5s ease-in;
 }
 
-.todo-list .todo.todo--default {
+.todo.todo--default {
   padding: 1.25rem 1.5rem;
   justify-content: center;
   color: var(--color-text);
+}
+
+.todo.todo--completed p {
+  color: #999;
+  text-decoration: line-through;
 }
 
 .todo-list .todo-action {
@@ -328,7 +317,6 @@ button > img {
 
 .delete,
 .checked {
-  border: 2px solid var(--color-primary);
   color: var(--color-white);
   padding: 1.25rem 1.5rem;
   border: none;
@@ -367,11 +355,6 @@ button > img {
 
 .d-none {
   display: none;
-}
-
-.checked-item p {
-  color: #999;
-  text-decoration: line-through;
 }
 
 .fall-out {
